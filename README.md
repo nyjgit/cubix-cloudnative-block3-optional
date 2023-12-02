@@ -1,2 +1,3 @@
-# cubix-cloudnative-block3-homework
-Cubix Cloud-Native Application Development Training: third homework 
+# Third optional assignment
+
+Here you can find the endpoint testing files for Postman or Bruno.

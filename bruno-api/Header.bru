@@ -1,0 +1,15 @@
+meta {
+  name: Header
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/header
+  body: none
+  auth: none
+}
+
+headers {
+  custom-header: bruno
+}

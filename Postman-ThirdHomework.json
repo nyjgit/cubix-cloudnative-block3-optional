@@ -1,0 +1,41 @@
+{
+  "info": {
+    "name": "Third Homework",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Data",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "custom-header",
+            "value": "bruno",
+            "disabled": false,
+            "type": "default"
+          }
+        ],
+        "url": "http://localhost:8080/data"
+      }
+    },
+    {
+      "name": "Header",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "custom-header",
+            "value": "bruno",
+            "disabled": false,
+            "type": "default"
+          }
+        ],
+        "url": "http://localhost:8080/header"
+      }
+    }
+  ],
+  "variable": []
+}
