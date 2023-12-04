@@ -12,7 +12,7 @@
         "header": [
           {
             "key": "custom-header",
-            "value": "bruno",
+            "value": "postman",
             "disabled": false,
             "type": "default"
           }
@@ -28,7 +28,7 @@
         "header": [
           {
             "key": "custom-header",
-            "value": "bruno",
+            "value": "postman",
             "disabled": false,
             "type": "default"
           }
