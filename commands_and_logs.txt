@@ -1,0 +1,40 @@
+# running the commands from the cubix-cloudnative-block3-optional directory
+
+
+# creating block3optional.yaml
+kubectl apply -f .\block3optional.yaml
+
+# sending requests to the Header endpoint
+	# through the ingress:
+		# sending a request with Postman (http://localhost:8080/header)
+			# response: {"Accept":["*/*"],"Accept-Encoding":["gzip, deflate, br"],"Cache-Control":["no-cache"],"Host":["localhost:8080"],"Postman-Token":["e95c6ffe-c679-4246-94e4-587f19f228c7"],"User-Agent":["PostmanRuntime/7.39.0"],"X-Forwarded-For":["172.18.0.1"],"X-Forwarded-Host":["localhost:8080"],"X-Forwarded-Port":["80"],"X-Forwarded-Proto":["http"],"X-Forwarded-Scheme":["http"],"X-Real-IP":["172.18.0.1"],"X-Request-ID":["bf37d9e8873c7de58230af29e71a41a5"],"X-Scheme":["http"],"custom-header":["postman"]}
+	
+	# through the service:
+		kubectl port-forward svc/quarkus3 8081:8080 -n optional3
+			# sending a request with Postman (http://localhost:8081/header)
+				# response: {"Accept":["*/*"],"Accept-Encoding":["gzip, deflate, br"],"Cache-Control":["no-cache"],"Connection":["keep-alive"],"Host":["localhost:8081"],"Postman-Token":["9bd23bad-d1de-4b48-a096-7cd84999688f"],"User-Agent":["PostmanRuntime/7.39.0"],"custom-header":["postman"]}
+			# ^C
+	
+	# by calling the pod directly:
+		kubectl get pods -n optional3
+			# name of the pod: quarkus3-7c8884fcb9-5lnxf
+		kubectl port-forward pod/quarkus3-7c8884fcb9-5lnxf 8081:8080 -n optional3
+			# sending a request with Postman (http://localhost:8081/header)
+				# response: {"Accept":["*/*"],"Accept-Encoding":["gzip, deflate, br"],"Cache-Control":["no-cache"],"Connection":["keep-alive"],"Host":["localhost:8081"],"Postman-Token":["1a082801-8be0-4b59-bbff-b817ca2a21e4"],"User-Agent":["PostmanRuntime/7.39.0"],"custom-header":["postman"]}
+			# ^C
+
+	# by making the call inside the pod:
+		kubectl exec -it pod/quarkus3-7c8884fcb9-5lnxf -n optional3 -- sh
+			# $ curl http://localhost:8080/header -H 'custom-header: curl' -s
+				# response: {"Accept":["*/*"],"Host":["localhost:8080"],"User-Agent":["curl/7.61.1"],"custom-header":["curl"]}
+			# $ exit
+
+
+echo NyogerJanos > name.txt
+kubectl cp .\name.txt quarkus3-7c8884fcb9-5lnxf:/deployments/optional.txt -n optional3
+
+# sending a request to the Data endpoint with Postman (http://localhost:8080/data)
+	# response: NyogerJanos-verymuchsecret-2628723819171
+
+
+kubectl delete namespace optional3
